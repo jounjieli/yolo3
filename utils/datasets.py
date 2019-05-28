@@ -163,7 +163,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
             from PIL import Image
 
             # Read image shapes
-            sp = 'data' + os.sep + path.replace('.txt', '.shapes').split(os.sep)[-1]  # shapefile path
+            sp = path.replace('.txt', '.shapes').split(os.sep)[-1]  # shapefile path
             if os.path.exists(sp):  # read existing shapefile
                 with open(sp, 'r') as f:
                     s = np.array([x.split() for x in f.read().splitlines()], dtype=np.float32)
@@ -171,6 +171,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
             else:  # no shapefile, so read shape using PIL and write shapefile for next time (faster)
                 s = np.array([Image.open(f).size for f in tqdm(self.img_files, desc='Reading image shapes')])
                 np.savetxt(sp, s, fmt='%g')
+
 
             # Sort by aspect ratio
             ar = s[:, 1] / s[:, 0]  # aspect ratio
@@ -220,17 +221,8 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
     def __getitem__(self, index):
         if self.image_weights:
             index = self.indices[index]
-
         img_path = self.img_files[index]
         label_path = self.label_files[index]
-<<<<<<< HEAD
-        # if hasattr(self, 'imgs'):
-        #    img = self.imgs[index]  # BGR
-        img = cv2.imread(img_path)  # BGR
-        
-        assert img is not None, 'File Not Found ' + img_path
-=======
-
         # Load image
         img = self.imgs[index]
         if img is None:
@@ -238,7 +230,6 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
             assert img is not None, 'File Not Found ' + img_path
             if self.n < 1001:
                 self.imgs[index] = img  # cache image into memory
->>>>>>> f131a1d52e562e36a2abb8996722b92af7918ac7
 
         # Augment colorspace
         augment_hsv = True

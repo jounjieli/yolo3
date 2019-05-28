@@ -65,7 +65,8 @@ def train(
         accumulate=1,
         multi_scale=False,
         freeze_backbone=False,
-        transfer=False  # Transfer learning (train only YOLO layers)
+        transfer=False,  # Transfer learning (train only YOLO layers)
+        save_num=10
 ):
     init_seeds()
     weights = './weights' + os.sep
@@ -74,13 +75,9 @@ def train(
     device = torch_utils.select_device()
 
     if multi_scale:
-<<<<<<< HEAD
-        img_size = 608  # initiate with maximum multi_scale size
-        opt.num_workers = 4  # bug https://github.com/ultralytics/yolov3/issues/174
-=======
         img_size = round((img_size / 32) * 1.5) * 32  # initiate with maximum multi_scale size
-        # opt.num_workers = 0  # bug https://github.com/ultralytics/yolov3/issues/174
->>>>>>> f131a1d52e562e36a2abb8996722b92af7918ac7
+        # opt.num_workers = 0
+
     else:
         torch.backends.cudnn.benchmark = True  # unsuitable for multiscale
 
@@ -312,14 +309,10 @@ if __name__ == '__main__':
     parser.add_argument('--cfg', type=str, default='./cfg/yolov3_chi.cfg', help='cfg file path')
     parser.add_argument('--data-cfg', type=str, default='./data/chi.data', help='coco.data file path')
     parser.add_argument('--multi-scale', action='store_true', help='random image sizes per batch 320 - 608')
-<<<<<<< HEAD
-    parser.add_argument('--img-size', type=int, default=768, help='pixels')
-=======
-    parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
->>>>>>> f131a1d52e562e36a2abb8996722b92af7918ac7
+    parser.add_argument('--img-size', type=int, default=512, help='inference size (pixels)')
     parser.add_argument('--resume', action='store_true', help='resume training flag')
     parser.add_argument('--transfer', action='store_true', help='transfer learning flag')
-    parser.add_argument('--num-workers', type=int, default=4, help='number of Pytorch DataLoader workers')
+    parser.add_argument('--num-workers', type=int, default=2, help='number of Pytorch DataLoader workers')
     parser.add_argument('--dist-url', default='tcp://127.0.0.1:9999', type=str, help='distributed training init method')
     parser.add_argument('--rank', default=0, type=int, help='distributed training node rank')
     parser.add_argument('--world-size', default=1, type=int, help='number of nodes for distributed training')
@@ -328,6 +321,7 @@ if __name__ == '__main__':
     parser.add_argument('--notest', action='store_true', help='only test final epoch')
     parser.add_argument('--evolve', action='store_true', help='run hyperparameter evolution')
     parser.add_argument('--var', default=0, type=int, help='debug variable')
+    parser.add_argument('--save-num', default=10, type=int, help='every few epochs to save')
     opt = parser.parse_args()
     print(opt)
 
@@ -346,6 +340,7 @@ if __name__ == '__main__':
         batch_size=opt.batch_size,
         accumulate=opt.accumulate,
         multi_scale=opt.multi_scale,
+        save_num=opt.save_num
     )
 
     # Evolve hyperparameters (optional)

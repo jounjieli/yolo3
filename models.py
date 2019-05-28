@@ -278,21 +278,12 @@ def load_darknet_weights(self, weights, cutoff=-1):
     # Open the weights file
     with open(weights, 'rb') as f:
         header = np.fromfile(f, dtype=np.int32, count=5)  # First five are header values
-
-<<<<<<< HEAD
-    # Needed to write header when saving weights
-    self.header_info = header
-    
-    self.seen = header[3]  # number of images seen during training
-    weights = np.fromfile(fp, dtype=np.float32)  # The rest are weights
-    fp.close()
-=======
         # Needed to write header when saving weights
         self.header_info = header
 
         self.seen = header[3]  # number of images seen during training
         weights = np.fromfile(f, dtype=np.float32)  # The rest are weights
->>>>>>> f131a1d52e562e36a2abb8996722b92af7918ac7
+
 
     ptr = 0
     for i, (module_def, module) in enumerate(zip(self.module_defs[:cutoff], self.module_list[:cutoff])):

@@ -118,21 +118,12 @@ def detect(
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-<<<<<<< HEAD
     parser.add_argument('--cfg', type=str, default='./cfg/yolov3_chi.cfg', help='cfg file path')
     parser.add_argument('--data-cfg', type=str, default='./data/chi.data', help='coco.data file path')
     parser.add_argument('--weights', type=str, default='./weights/latest.pt', help='path to weights file')
     parser.add_argument('--images', type=str, default='./data/samples', help='path to images')
-    parser.add_argument('--img-size', type=int, default=768, help='size of each image dimension')
+    parser.add_argument('--img-size', type=int, default=512, help='size of each image dimension')
     parser.add_argument('--conf-thres', type=float, default=0.15, help='object confidence threshold')
-=======
-    parser.add_argument('--cfg', type=str, default='cfg/yolov3-spp.cfg', help='cfg file path')
-    parser.add_argument('--data-cfg', type=str, default='data/coco.data', help='coco.data file path')
-    parser.add_argument('--weights', type=str, default='weights/yolov3-spp.weights', help='path to weights file')
-    parser.add_argument('--images', type=str, default='data/samples', help='path to images')
-    parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
-    parser.add_argument('--conf-thres', type=float, default=0.5, help='object confidence threshold')
->>>>>>> f131a1d52e562e36a2abb8996722b92af7918ac7
     parser.add_argument('--nms-thres', type=float, default=0.5, help='iou threshold for non-maximum suppression')
     parser.add_argument('--fourcc', type=str, default='mp4v', help='specifies the fourcc code for output video encoding (make sure ffmpeg supports specified fourcc codec)')
     parser.add_argument('--output', type=str, default='output',help='specifies the output path for images and videos')
