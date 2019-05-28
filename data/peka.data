@@ -1,0 +1,6 @@
+classes=1
+train=./labelImg/Mydata/pokemon/train.txt
+valid=./labelImg/Mydata/pokemon/val.txt
+names=./labelImg/Mydata/pokemon/label.names
+backup=./backup/
+eval=coco

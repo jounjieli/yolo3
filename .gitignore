@@ -1,4 +1,11 @@
 # Byte-compiled / optimized / DLL files
+issue_solve
+labelImg
+data/coco
+data/samples*
+output
+weight
+
 __pycache__/
 *.py[cod]
 *$py.class

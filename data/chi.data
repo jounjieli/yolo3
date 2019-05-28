@@ -1,0 +1,6 @@
+classes=1
+train=./labelImg/Mydata/char/train.txt
+valid=./labelImg/Mydata/char/val.txt
+names=./labelImg/Mydata/char/label.names
+backup=./backup/
+eval=chi
