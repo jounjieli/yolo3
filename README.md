@@ -1,5 +1,22 @@
 # yolov3 #
 
+# Requirements
+
+yolov3:
+
+- `pytorch >= 1.0.0`
+
+- `opencv-python`
+
+ocr:
+
+- `pytesseract`
+- `matplotlib`
+- `Pillow`
+
+
+## weight ##
+
 darknet53 pretrained weight:
 
 ```
@@ -9,6 +26,8 @@ wget https://pjreddie.com/media/files/darknet53.conv.74
 other pretrained weight:
 
 <https://pjreddie.com/darknet/yolo/>
+
+## show ##
 
 yolov3 效果展示:
 
